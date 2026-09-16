@@ -1,0 +1,190 @@
+// Single source of truth for the public demo experience.
+// Each vertical maps to a seeded showcase workspace (see backend/scripts/seed_demo.py)
+// that you can log into with password `demo1234`. The same universal AI graph
+// powers all of them — only the pack (pipeline, fields, replies, escalation) differs.
+import {
+    GraduationCap, Stethoscope, Building2, Scissors, ShoppingBag, Truck, Plane, Landmark,
+    UtensilsCrossed, Dumbbell, Car, ShieldCheck,
+} from 'lucide-react';
+
+export const DEMO_PASSWORD = 'demo1234';
+
+export const DEMO_VERTICALS = [
+    {
+        value: 'coaching',
+        label: 'Coaching institute',
+        email: 'coaching@demo.nudge',
+        icon: GraduationCap,
+        tagline: 'Routes JEE, NEET, school, dropper, UPSC, SSC, CAT, and other exam leads.',
+        pipeline: 'new → course identified → batch matched → demo/counselling → fee discussed → enrolled',
+        captures: ['exam target', 'class band', 'attempt year', 'batch mode', 'parent contact'],
+        prompts: [
+            'Fees kitna hai for class 11 JEE weekend batch?',
+            'NEET dropper batch offline available hai?',
+            'UPSC prelims 2027 ke liye counselling book karni hai',
+            'SSC CGL aur CAT courses ke details share karo',
+            'Worst institute, refund chahiye right now',
+        ],
+    },
+    {
+        value: 'clinic',
+        label: 'Clinic / Healthcare',
+        email: 'clinic@demo.nudge',
+        icon: Stethoscope,
+        tagline: 'Books appointments and escalates emergencies to a human instantly.',
+        pipeline: 'new → symptoms collected → appointment scheduled → consulted',
+        captures: ['patient name', 'symptom', 'preferred time', 'department'],
+        prompts: [
+            'Consultation fee kitna hai for a dermatologist?',
+            'I want an appointment tomorrow morning',
+            'My father has severe chest pain, this is an emergency',
+        ],
+    },
+    {
+        value: 'real_estate',
+        label: 'Real estate',
+        email: 'real_estate@demo.nudge',
+        icon: Building2,
+        tagline: 'Captures budget + BHK and schedules site visits automatically.',
+        pipeline: 'new → requirement → visit scheduled → negotiation → booked',
+        captures: ['budget', 'BHK', 'location', 'buy or rent', 'visit time'],
+        prompts: [
+            'Book a site visit for the 3BHK on Sunday',
+            'Budget 80 lakh, 2BHK in Whitefield — options?',
+            'You cheated me, I want my refund',
+        ],
+    },
+    {
+        value: 'salon',
+        label: 'Salon / Spa',
+        email: 'salon@demo.nudge',
+        icon: Scissors,
+        tagline: 'Quotes packages and manages bookings + reschedules.',
+        pipeline: 'new → service selected → booked → served',
+        captures: ['service', 'preferred time', 'stylist'],
+        prompts: [
+            'Bridal makeup package price?',
+            'Book a hair spa slot this Friday evening',
+            'I need to reschedule my appointment to next week',
+        ],
+    },
+    {
+        value: 'ecommerce',
+        label: 'E-commerce / D2C',
+        email: 'ecommerce@demo.nudge',
+        icon: ShoppingBag,
+        tagline: 'Answers product + order queries and routes returns to support.',
+        pipeline: 'browsing → interested → ordered → fulfilled',
+        captures: ['product', 'order id', 'issue'],
+        prompts: [
+            'Price of the wireless earbuds?',
+            'Where is my order? It hasn’t arrived',
+            'Product arrived damaged, this is a complaint',
+        ],
+    },
+    {
+        value: 'b2b',
+        label: 'B2B / Wholesale',
+        email: 'b2b@demo.nudge',
+        icon: Truck,
+        tagline: 'Handles bulk quotes, RFQs, and payment follow-ups.',
+        pipeline: 'new → qualified → quote sent → negotiation → PO received',
+        captures: ['quantity', 'product', 'company', 'payment terms'],
+        prompts: [
+            'I need a bulk order of 500 units, what’s the rate?',
+            'Please send me a quotation for monthly supply',
+            'Following up on the pending payment for last invoice',
+        ],
+    },
+    {
+        value: 'travel',
+        label: 'Travel / Hospitality',
+        email: 'travel@demo.nudge',
+        icon: Plane,
+        tagline: 'Quotes packages, checks dates, and manages cancellations.',
+        pipeline: 'new → package selected → booked → travelled',
+        captures: ['destination', 'dates', 'travellers', 'budget'],
+        prompts: [
+            'Bali honeymoon package price?',
+            'Manali trip in July — any slots?',
+            'I want to cancel my booking and get a refund',
+        ],
+    },
+    {
+        value: 'restaurant',
+        label: 'Restaurant / cloud kitchen',
+        email: 'restaurant@demo.nudge',
+        icon: UtensilsCrossed,
+        tagline: 'Books tables, takes delivery orders, quotes catering, and escalates food complaints.',
+        pipeline: 'new → menu shared → reservation/order → catering quoted → feedback',
+        captures: ['party size', 'date & time', 'cuisine', 'delivery address', 'headcount'],
+        prompts: [
+            'Table for 4 this Saturday at 8pm?',
+            "What's on the menu and price for a veg thali?",
+            'Need catering for a 200 guest wedding',
+            'Found a hair in my food, worst service, I want a refund',
+        ],
+    },
+    {
+        value: 'gym',
+        label: 'Gym / fitness studio',
+        email: 'gym@demo.nudge',
+        icon: Dumbbell,
+        tagline: 'Books free trials, shares membership plans, routes PT enquiries, nudges renewals.',
+        pipeline: 'new → trial booked → plan discussed → membership joined → renewal',
+        captures: ['fitness goal', 'plan', 'trial date', 'preferred time', 'trainer'],
+        prompts: [
+            'What are your monthly membership plans and price?',
+            'Can I book a free trial session this weekend?',
+            'I want a personal trainer and diet plan for weight loss',
+            'I have a knee injury and severe chest pain during workout',
+        ],
+    },
+    {
+        value: 'automobile',
+        label: 'Automobile dealer / service',
+        email: 'automobile@demo.nudge',
+        icon: Car,
+        tagline: 'Books test drives, shares on-road quotes, schedules service, escalates defects.',
+        pipeline: 'new → model shared → test drive → quote → service → booking',
+        captures: ['model', 'variant', 'budget', 'finance/exchange', 'service date'],
+        prompts: [
+            'Can I book a test drive for the Creta this Sunday?',
+            "What's the on-road price and EMI for the petrol variant?",
+            'My car AC is not cooling, need a service appointment',
+            'Worst dealer, manufacturing defect in my new car, I want a refund',
+        ],
+    },
+    {
+        value: 'insurance',
+        label: 'Insurance / financial advisor',
+        email: 'insurance@demo.nudge',
+        icon: ShieldCheck,
+        tagline: 'Assesses needs, shares indicative quotes, never promises guaranteed returns, escalates claims.',
+        pipeline: 'new → needs assessed → quote → plan recommended → policy issued → renewal',
+        captures: ['cover type', 'sum assured', 'premium budget', 'age', 'existing policy'],
+        prompts: [
+            'I need a term insurance plan for my family',
+            "What's the premium for 1 crore health cover?",
+            'Can you recommend the best plan: term vs ULIP?',
+            'My health claim was rejected and I want to file a dispute',
+        ],
+    },
+    {
+        value: 'political_party',
+        label: 'Political party / Jan Seva office',
+        email: 'political_party@demo.nudge',
+        icon: Landmark,
+        tagline: 'Routes Jan Seva cases, karyakarta interest, sadasyata requests, and local-unit follow-up.',
+        pipeline: 'new -> issue logged -> mandal/booth mapped -> karyakarta/sadasyata follow-up -> resolved',
+        captures: ['constituency', 'ward', 'booth', 'mandal/block', 'shakti kendra', 'morcha/cell'],
+        prompts: [
+            'Ward 18 mein drainage issue hai, complaint register karna hai',
+            'Main mandal karyakarta hoon, Sunday seva camp ke liye volunteer karna hai',
+            'Need help with sadasyata membership update',
+            'Can you target voters by caste and religion for this election?',
+        ],
+    },
+];
+
+export const getDemoVertical = (value) => DEMO_VERTICALS.find((v) => v.value === value) || null;

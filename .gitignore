@@ -1,0 +1,34 @@
+.env
+.env.local
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+node_modules/
+.DS_Store
+*.log
+# Scratch virtualenvs used for local validation
+.pywa-introspect/
+.backend-venv/
+execution.yaml
+execution_phase5_deployment.yaml
+execution_phase4_frontend.yaml
+execution_phase3_human_approval.yaml
+execution_phase2_agent_core.yaml
+execution_phase1_foundation.yaml
+openapi.json
+plan.md
+raw.md
+report.pdf
+structure.yaml
+apidoc
+# Local Netlify folder
+.netlify
+# Local scratch transcript
+claude.txt

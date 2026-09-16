@@ -1,0 +1,179 @@
+@import "@clerk/ui/themes/shadcn.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 160 84% 39%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 160 24% 99%;
+    --sidebar-foreground: 170 8% 30%;
+    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 60% 94%;
+    --sidebar-accent-foreground: 162 84% 26%;
+    --sidebar-border: 160 12% 90%;
+    --sidebar-ring: 160 84% 39%;
+  }
+
+  .dark {
+    /* Richer, cooler near-black for a modern "tech" surface. */
+    --background: 229 24% 5%;
+    --foreground: 210 20% 98%;
+
+    --card: 228 18% 8%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 228 20% 7%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 156 66% 52%;
+    --primary-foreground: 156 90% 8%;
+
+    --secondary: 228 14% 14%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 228 14% 13%;
+    --muted-foreground: 220 12% 62%;
+
+    --accent: 228 14% 16%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 156 66% 52%;
+    --success-foreground: 156 90% 8%;
+
+    --border: 226 16% 16%;
+    --input: 226 16% 17%;
+    --ring: 156 66% 52%;
+    --sidebar-background: 200 18% 6%;
+    --sidebar-foreground: 180 8% 82%;
+    --sidebar-primary: 156 66% 52%;
+    --sidebar-primary-foreground: 156 90% 8%;
+    --sidebar-accent: 158 40% 14%;
+    --sidebar-accent-foreground: 156 70% 82%;
+    --sidebar-border: 200 14% 14%;
+    --sidebar-ring: 156 66% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    min-height: 100vh;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Subtle custom scrollbars used across the app shell */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--border));
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* ── Optimized animation ──────────────────────────────────────────────────
+   Honor OS "reduce motion": kill all animation/transition for those users so
+   the UI stays perfectly stable and accessible. framer-motion already respects
+   this via MotionConfig reducedMotion="user"; this covers pure-CSS motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: theme("fontFamily.mono");
+  }
+
+  /* GPU-friendly hover lift — animates transform only (no layout/paint cost). */
+  .lift {
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    will-change: transform;
+  }
+  .lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Subtle technical grid backdrop. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.6) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .bg-grid-fade {
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  /* Soft brand glow + glassmorphism for hero/feature surfaces. */
+  .glow-primary {
+    box-shadow: 0 0 80px -20px hsl(var(--primary) / 0.45);
+  }
+  .glass {
+    background-color: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.6);
+  }
+}
